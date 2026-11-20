@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>누전차단기 선정과 오동작 대책 — 전기설비 허브</title>
+<meta name="description" content="누전차단기 선정 실무 해설: 30mA와 100mA 감도전류의 구분, 고속형과 시연형의 선택, 오동작 원인과 대책을 정리했습니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+.article{padding:26px 0 12px}
+.back{margin-bottom:10px}
+.back a{font-weight:700;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.crumb{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.article h1{font-size:clamp(26px,4.5vw,34px);line-height:1.25;margin-bottom:10px}
+.lede{font-size:17px;color:#334155;margin-bottom:22px}
+.article h2{font-size:21px;margin:28px 0 8px;padding-top:6px;border-top:2px solid var(--amber);display:inline-block}
+.article h3{font-size:17px;margin:18px 0 6px}
+.article p{font-size:15.5px;color:#1e293b;margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px;font-size:15.5px;color:#1e293b}
+.article li{margin-bottom:6px}
+.article table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.article th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px}
+.article td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.article tr:nth-child(even) td{background:#f8fafc}
+.formula{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:8px;padding:10px 12px;margin:12px 0}
+.formula code{color:var(--navy);font-weight:600}
+.safety{background:var(--red-bg);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;margin:22px 0;font-size:14.5px;color:#7f1d1d}
+.related{background:var(--amber-bg);border:1px solid #fde68a;border-radius:12px;padding:16px 18px;margin:22px 0}
+.related h3{font-size:15px;margin:0 0 8px}
+.related ul{margin:0 0 0 20px}
+.related li{margin-bottom:4px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="../index.html"><span class="mark">전</span><span><b>전기설비 <span>허브</span></b><small>electricalcalc.github.io/</small></span></a>
+    <nav class="main-nav">
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#reference">기준표</a>
+      <a href="../index.html#guides">실무 가이드</a>
+      <a href="../index.html#faq">자주 묻는 질문</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap article">
+  <p class="back"><a href="../index.html">&larr; 전기설비 허브로 돌아가기</a></p>
+  <p class="crumb">가이드 / 누전 보호</p>
+  <h1>누전차단기 선정과 오동작 대책</h1>
+  <p class="lede">누전차단기는 감전 사고를 막는 핵심 장치입니다. 사람이 전기에 감전되면 심장이 멈출 수 있는데, 누전차단기는 인체에 위험한 전류가 흐르는 것을 감지해 0.1초 안에 전원을 끊습니다. 그런데 현장에서는 누전차단기가 자꾸 떨어져 불편하다는 불만도 많습니다. 대부분은 선정이 잘못됐거나, 설비의 누설전류를 고려하지 않았기 때문입니다. 이 가이드에서는 누전차단기의 원리와 감도전류 선택, 고속형과 시연형의 구분, 오동작 원인과 대책을 정리합니다.</p>
+
+  <h2>누전차단기의 원리</h2>
+  <p>누전차단기는 영상변류기(ZCT)라는 부품을 이용해 전류의 균형을 감시합니다. 정상 상태에서는 나가는 전류와 돌아오는 전류가 같아 합이 0이 됩니다. 그런데 어딘가에서 전류가 새면 나가는 전류와 돌아오는 전류에 차이가 생기고, 이 차이를 영상변류기가 감지해 차단기를 동작시킵니다. 이 차이 전류를 지락전류 또는 누설전류라고 합니다. 사람이 감전되면 인체를 통해 전류가 땅으로 흐르므로, 누전차단기는 이를 감지해 전원을 끊습니다.</p>
+  <p>누전차단기에는 과부하와 단락을 함께 차단하는 기능이 들어 있습니다. 그래서 배선용 차단기(MCCB) 대신 누전차단기 하나만으로 회로 보호와 감전 보호를 동시에 할 수 있습니다. 다만 차단 용량과 정격전류는 회로에 맞게 골라야 합니다. 정격전류가 부하전류보다 작으면 정상 부하에도 차단기가 떨어지고, 전선 허용전류보다 크면 전선이 타도 차단기가 동작하지 않습니다.</p>
+  <p>감도전류는 누전차단기가 동작하는 최소 누설전류를 뜻합니다. 30mA 제품은 누설전류가 30mA에 도달하면 차단하고, 100mA 제품은 100mA에서 차단합니다. 인체가 견딜 수 있는 전류는 심장을 통과하는 경로 기준으로 약 30mA 정도이므로, 인체 보호용으로는 30mA를 씁니다. 화재 예방용으로는 100~200mA를 사용합니다.</p>
+
+  <h2>감도전류와 동작 시간 선택</h2>
+  <p>감도전류와 동작 시간은 설치 장소와 용도에 따라 구분해 선택합니다. 아래 표는 현장에서 가장 많이 쓰는 조합입니다.</p>
+  <table>
+    <tr><th>설치 장소·용도</th><th>감도전류</th><th>동작 시간</th><th>비고</th></tr>
+    <tr><td>콘센트 회로 (일반)</td><td>30mA</td><td>0.1초 이내 (고속형)</td><td>인체 보호 기본</td></tr>
+    <tr><td>욕실·주방·옥외</td><td>30mA</td><td>0.1초 이내 (고속형)</td><td>습기 많은 장소</td></tr>
+    <tr><td>간선 (인입 분전반)</td><td>100~200mA</td><td>0.1~0.3초 (시연형)</td><td>화재 예방, 선택 차단</td></tr>
+    <tr><td>전동기 전용 회로</td><td>30~100mA</td><td>0.1초 이내</td><td>기동 시 누설 고려</td></tr>
+    <tr><td>의료·수영장 설비</td><td>15mA</td><td>0.1초 이내</td><td>고감도 보호</td></tr>
+    <tr><td>전기온수기·보일러</td><td>30mA</td><td>0.1초 이내</td><td>물과 접촉하는 기기</td></tr>
+  </table>
+  <p>고속형은 누설전류가 감도전류에 도달하면 0.1초 안에 차단합니다. 사람이 접촉하는 회로에는 반드시 고속형을 씁니다. 시연형은 의도적으로 0.1~0.5초 정도 늦게 동작하는 제품으로, 간선에 설치해 분기 회로의 누전차단기보다 나중에 동작하게 합니다. 이렇게 하면 분기 회로에 누전이 생겼을 때 분기 차단기만 떨어지고 간선 차단기는 유지되어 다른 회로의 정전을 막을 수 있습니다. 이를 선택 차단이라 합니다.</p>
+  <p>감도전류를 고를 때는 설비의 정상 누설전류도 고려해야 합니다. 모든 전기기기는 정상 상태에서도 아주 작은 누설전류가 흐릅니다. 긴 케이블, 인버터, 전자식 안정기, 컴퓨터 전원장치가 많은 회로에서는 정상 누설전류가 수 mA에 달할 수 있습니다. 정상 누설전류가 감도전류의 3분의 1을 넘으면 오동작이 잦아지므로, 이런 회로에는 감도전류를 높이거나 회로를 나누는 대책이 필요합니다.</p>
+
+  <h2>단계별 선정 절차</h2>
+  <ol>
+    <li><strong>회로의 용도를 확인한다.</strong> 사람이 접촉할 수 있는 회로인지, 간선인지, 전동기 전용 회로인지 구분합니다. 용도에 따라 감도전류와 동작 시간이 정해집니다.</li>
+    <li><strong>부하전류를 계산한다.</strong> 회로의 부하전류에 1.25를 곱한 값보다 큰 표준 정격을 고릅니다. 부하전류가 24A라면 30A 정격을 선택합니다.</li>
+    <li><strong>감도전류를 정한다.</strong> 인체 보호 회로는 30mA 고속형, 간선은 100~200mA 시연형을 기본으로 합니다. 정상 누설전류가 큰 회로인지 함께 검토합니다.</li>
+    <li><strong>차단 용량을 확인한다.</strong> 설치 지점의 단락전류보다 큰 차단 용량을 가진 제품을 고릅니다. 주택용은 1.5~2.5kA, 상가·공장은 5~10kA 이상이 필요한 경우가 많습니다.</li>
+    <li><strong>선택 차단을 검토한다.</strong> 간선과 분기 회로에 모두 누전차단기를 쓸 때는 감도전류와 동작 시간에 차이를 두어 분기 차단기가 먼저 동작하게 합니다.</li>
+    <li><strong>설치 후 테스트 버튼으로 동작을 확인한다.</strong> 설치가 끝나면 테스트 버튼을 눌러 정상 동작하는지 확인하고, 실제 부하를 걸어 오동작이 없는지 점검합니다.</li>
+  </ol>
+
+  <h2>오동작의 흔한 원인</h2>
+  <ul>
+    <li><strong>정상 누설전류가 큰 설비:</strong> 인버터, 컴퓨터, LED 조명, 긴 케이블은 정상 상태에서도 누설전류가 큽니다. 감도전류 30mA 제품에 이런 부하를 많이 연결하면 오동작이 잦아집니다. 회로를 나누거나 감도전류를 조정합니다.</li>
+    <li><strong>중성선과 접지선의 혼촉:</strong> 중성선과 접지선이 분전반이나 기기 내부에서 닿으면 전류가 접지선으로 흘러 누전차단기가 동작합니다. 결선을 다시 확인하고 분리합니다.</li>
+    <li><strong>습기와 절연 저하:</strong> 비가 새거나 습기가 많은 곳에서는 전선 절연이 떨어져 누설전류가 늘어납니다. 방수 처리를 하고 절연저항을 측정해 원인을 찾습니다.</li>
+    <li><strong>전동기 기동 시 서지:</strong> 전동기가 기동할 때 순간적으로 큰 누설전류가 흐를 수 있습니다. 전동기 전용 회로에는 시연형이나 감도전류가 큰 제품을 검토합니다.</li>
+    <li><strong>차단기 자체의 노후화:</strong> 오래된 누전차단기는 내부 부품이 열화되어 정상 전류에도 동작할 수 있습니다. 테스트 버튼으로 확인하고, 10년 이상 된 제품은 교체를 검토합니다.</li>
+  </ul>
+
+  <h2>트립이 반복될 때의 대처 순서</h2>
+  <p>누전차단기가 자꾸 떨어진다고 해서 감도전류를 키우거나 누전차단기를 MCCB로 바꾸는 것은 가장 위험한 대처입니다. 감전 보호 기능이 사라지기 때문입니다. 올바른 순서는 원인부터 찾는 것입니다. 먼저 모든 부하를 분리하고 차단기를 올린 뒤, 부하를 하나씩 연결하면서 어느 부하에서 트립이 발생하는지 찾습니다. 특정 부하에서만 트립이 생기면 그 기기의 절연을 점검합니다.</p>
+  <p>어느 부하에서도 트립이 생기지 않는데 차단기가 떨어진다면 배선 자체의 문제일 수 있습니다. 절연저항 측정기로 회로별 절연을 측정하고, 중성선과 접지선의 혼촉이 없는지 확인합니다. 습기가 의심되면 배선 경로를 점검하고 방수 조치를 합니다. 원인을 찾지 못한 채 감도전류만 키우면 감전 사고의 위험을 키우는 것이므로, 반드시 원인을 해결한 뒤 사용해야 합니다.</p>
+
+  <h2>인버터와 전자기기 회로의 누전차단기</h2>
+  <p>인버터나 전자기기가 많은 회로에서는 누전차단기 선정이 까다롭습니다. 인버터는 직류 전원을 고주파로 스위칭해 교류로 바꾸는 과정에서 고주파 누설전류가 생깁니다. 이 누설전류는 일반 누전차단기가 감지하기 어려운 성분도 있고, 반대로 정상 누설로 오인해 차단기를 동작시키기도 합니다. 인버터 회로에 일반 30mA 누전차단기를 쓰면 기동할 때마다 차단기가 떨어지는 일이 생깁니다. 이런 회로에는 인버터 대응형 누전차단기를 쓰거나, 제조사에서 지정한 감도전류와 형식을 따라야 합니다.</p>
+  <p>직류 누설이 생길 수 있는 회로에는 B형 누전차단기를 검토합니다. B형은 교류 누설뿐 아니라 평활 직류 누설까지 감지하는 제품으로, 태양광 인버터나 전기차 충전기처럼 직류 성분이 섞일 수 있는 설비에 쓰입니다. 일반 A형 누전차단기는 직류 누설이 크면 동작하지 않을 수 있으므로, 직류가 섞일 가능성이 있는 회로에는 B형을 쓰는 것이 안전합니다. B형은 가격이 비싸므로, 모든 회로에 쓸 필요는 없고 직류 성분이 있는 회로에만 적용합니다.</p>
+  <p>컴퓨터와 LED 조명, 전자식 안정기가 많은 사무실 회로도 주의가 필요합니다. 이런 기기는 정상 상태에서도 각각 수 mA의 누설전류가 흐르는데, 한 회로에 많이 연결하면 합산 누설전류가 감도전류에 가까워져 오동작이 잦아집니다. 대책은 회로를 나누어 한 회로에 연결되는 기기 수를 줄이는 것입니다. 정상 누설전류의 합이 감도전류의 3분의 1을 넘지 않게 회로를 설계하고, 필요하면 감도전류가 큰 제품으로 바꾸되 인체 보호가 필요한 회로에서는 30mA를 유지합니다. 회로를 나눌 때는 접지선도 함께 분리해 접지 전류가 한곳으로 몰리지 않게 합니다.</p>
+
+  <h2>누전차단기 설치 위치와 회로 구성</h2>
+  <p>누전차단기는 어디에 설치하느냐에 따라 보호 범위가 달라집니다. 가장 일반적인 구성은 분전반의 각 분기 회로에 누전차단기를 다는 것입니다. 이렇게 하면 한 회로에 누전이 생겨도 그 회로만 차단되고 다른 회로는 계속 사용할 수 있습니다. 반대로 분전반 주 차단기에만 누전차단기를 달면, 어느 회로에서 누전이 생겨도 건물 전체가 정전됩니다. 주택에서는 분기 회로마다 누전차단기를 다는 것이 표준이며, 간선에는 화재 예방용 100mA 시연형을 함께 쓰기도 합니다.</p>
+  <p>회로를 구성할 때는 누전차단기 하나에 너무 많은 부하를 연결하지 않는 것이 중요합니다. 한 회로에 콘센트가 너무 많으면 정상 누설전류가 합산되어 오동작이 잦아집니다. 콘센트 회로는 보통 10~15개 이내로 나누고, 주방처럼 누설이 큰 기기가 많은 곳은 별도 회로로 분리합니다. 욕실과 주방, 옥외 회로는 각각 전용 누전차단기를 쓰는 것이 안전합니다. 회로를 나눌 때는 중성선도 함께 나누어야 합니다. 여러 회로의 중성선을 한데 묶으면 누전차단기가 오동작하므로, 각 회로의 중성선은 해당 차단기의 중성선 단자에만 연결합니다.</p>
+  <p>누전차단기를 설치한 뒤에는 반드시 동작 시험을 합니다. 테스트 버튼을 눌러 차단되는지 확인하고, 실제 부하를 연결한 상태에서 30분 정도 운전해 오동작이 없는지 봅니다. 테스트 버튼을 눌렀는데 차단되지 않으면 내부 회로가 고장 난 것이므로 즉시 교체합니다. 오래된 건물에서 누전차단기를 새로 설치할 때는 기존 배선의 절연 상태를 먼저 측정해야 합니다. 절연이 나쁜 배선에 누전차단기를 달면 설치 직후부터 차단기가 계속 떨어지기 때문입니다. 절연저항이 기준 미달이면 배선을 먼저 수리한 뒤 누전차단기를 설치합니다.</p>
+
+  <h2>누전차단기 교체 시기</h2>
+  <p>누전차단기도 수명이 있습니다. 제조사는 보통 10~15년을 권장 사용 기간으로 제시합니다. 오래된 차단기는 내부 부품이 열화되어 테스트 버튼을 눌러도 동작하지 않거나, 정상 전류에서 오동작하는 경우가 생깁니다. 월간 테스트에서 동작하지 않으면 즉시 교체해야 하고, 동작하더라도 15년이 넘은 제품은 교체를 검토하는 것이 안전합니다.</p>
+  <p>교체할 때는 기존 제품과 같은 정격과 감도전류를 쓰는 것이 기본입니다. 감도전류를 함부로 바꾸면 보호 기능이 약해지거나 오동작이 생깁니다. 교체 후에는 테스트 버튼으로 동작을 확인하고, 실제 부하를 걸어 30분 정도 운전해 봅니다. 교체 기록은 분전반 문 안쪽에 붙여 두면 다음 교체 시기를 알 수 있습니다.</p>
+
+  <h2>자주 묻는 질문</h2>
+  <h3>누전차단기 테스트 버튼은 얼마나 자주 눌러야 하나요?</h3>
+  <p>월 1회 정도 테스트 버튼을 눌러 정상 동작하는지 확인하는 것이 좋습니다. 테스트 버튼은 인위적으로 누설전류를 만들어 차단기가 동작하는지 확인하는 장치입니다. 버튼을 눌렀는데 차단기가 떨어지지 않으면 내부 회로가 고장 난 것이므로 즉시 교체해야 합니다.</p>
+  <h3>감도전류 30mA와 100mA를 바꿔 써도 되나요?</h3>
+  <p>안 됩니다. 30mA는 인체 보호용, 100mA는 화재 예방용으로 목적이 다릅니다. 인체 보호가 필요한 회로에 100mA를 쓰면 감전 시 차단이 늦어 위험하고, 간선에 30mA를 쓰면 정상 누설전류 때문에 오동작이 잦아집니다. 용도에 맞는 감도전류를 써야 합니다.</p>
+  <h3>누전차단기가 떨어졌을 때 바로 올려도 되나요?</h3>
+  <p>원인을 확인하기 전에는 바로 올리지 않는 것이 좋습니다. 먼저 어떤 부하가 연결되어 있었는지 확인하고, 젖은 손으로 기기를 만지지 않았는지, 물이 새는 곳은 없는지 살펴봅니다. 원인이 분명하고 제거됐다면 다시 올리고, 원인을 모르겠으면 부하를 분리한 뒤 하나씩 연결해 원인을 찾습니다.</p>
+
+  <div class="safety"><strong>안전 수칙:</strong> 누전차단기가 반복해서 동작하면 감도전류를 키우거나 누전차단기를 제거하지 마세요. 감전 보호 기능이 사라져 생명을 위협합니다. 반드시 원인을 찾아 해결한 뒤 사용하세요. 누전차단기 교체 작업 전에는 전원을 차단하고 검전기로 확인하세요.</div>
+
+  <div class="related">
+    <h3>관련 계산기</h3>
+    <ul>
+      <li><a href="../index.html#calc-breaker">차단기 용량 선정 계산기</a> — MCCB와 ELB 정격, 감도전류 선정</li>
+      <li><a href="../index.html#calc-wire">전선 굵기·허용전류 계산기</a> — 회로 전선 굵기 선정</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>전기설비 허브</h4>
+        <p>전기공사 현장과 설계를 위한 무료 계산기. KS C IEC 60364 기준 · 380V 3상 / 220V 단상 · 60Hz.</p>
+        <p style="margin-top:8px">electricalcalc.github.io/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="../index.html#calc-wire">전선 굵기·허용전류</a></li>
+          <li><a href="../index.html#calc-breaker">차단기 용량 선정</a></li>
+          <li><a href="../index.html#calc-vdrop">전압강하</a></li>
+          <li><a href="../index.html#calc-3phase">3상 전류·전력</a></li>
+          <li><a href="../index.html#calc-demand">부하용량·수요율</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가이드</h4>
+        <ul>
+          <li><a href="distribution-board-wiring.html">분전반 결선 실무</a></li>
+          <li><a href="grounding-work.html">접지공사와 접지저항</a></li>
+          <li><a href="elcb-selection.html">누전차단기 선정과 오동작 대책</a></li>
+          <li><a href="cable-laying-conduit.html">케이블 포설과 전선관 공사</a></li>
+          <li><a href="insulation-resistance-test.html">절연저항 측정 실무</a></li>
+          <li><a href="electrical-inspection-safety.html">전기설비 점검과 안전관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 전기설비 허브 · 모든 계산은 브라우저 안에서 처리됩니다 · 결과는 추정치입니다 — 제조사 자료와 전기설비기술기준(KEC)으로 확인하세요.</div>
+  </div>
+</footer>
+
+</body>
+</html>

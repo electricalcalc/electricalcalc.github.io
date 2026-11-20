@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>절연저항 측정 실무 — 전기설비 허브</title>
+<meta name="description" content="절연저항 측정 실무 해설: 메거 시험기 전압 선택, 회로별 기준값, 측정 전후 방전 절차, 낮은 값이 나왔을 때의 원인 추적 순서를 정리했습니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+.article{padding:26px 0 12px}
+.back{margin-bottom:10px}
+.back a{font-weight:700;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.crumb{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.article h1{font-size:clamp(26px,4.5vw,34px);line-height:1.25;margin-bottom:10px}
+.lede{font-size:17px;color:#334155;margin-bottom:22px}
+.article h2{font-size:21px;margin:28px 0 8px;padding-top:6px;border-top:2px solid var(--amber);display:inline-block}
+.article h3{font-size:17px;margin:18px 0 6px}
+.article p{font-size:15.5px;color:#1e293b;margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px;font-size:15.5px;color:#1e293b}
+.article li{margin-bottom:6px}
+.article table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.article th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px}
+.article td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.article tr:nth-child(even) td{background:#f8fafc}
+.formula{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:8px;padding:10px 12px;margin:12px 0}
+.formula code{color:var(--navy);font-weight:600}
+.safety{background:var(--red-bg);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;margin:22px 0;font-size:14.5px;color:#7f1d1d}
+.related{background:var(--amber-bg);border:1px solid #fde68a;border-radius:12px;padding:16px 18px;margin:22px 0}
+.related h3{font-size:15px;margin:0 0 8px}
+.related ul{margin:0 0 0 20px}
+.related li{margin-bottom:4px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="../index.html"><span class="mark">전</span><span><b>전기설비 <span>허브</span></b><small>electricalcalc.github.io/</small></span></a>
+    <nav class="main-nav">
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#reference">기준표</a>
+      <a href="../index.html#guides">실무 가이드</a>
+      <a href="../index.html#faq">자주 묻는 질문</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap article">
+  <p class="back"><a href="../index.html">&larr; 전기설비 허브로 돌아가기</a></p>
+  <p class="crumb">가이드 / 시험·진단</p>
+  <h1>절연저항 측정 실무</h1>
+  <p class="lede">절연저항 측정은 전기설비의 건강검진입니다. 전선의 피복이나 기기의 절연이 멀쩡한지, 습기가 스며들지는 않았는지, 어딘가 손상된 곳은 없는지를 숫자로 확인하는 검사입니다. 절연이 나빠지면 누전이 생기고, 누전이 심해지면 감전이나 화재로 이어집니다. 그런데 측정을 잘못하면 멀쩡한 설비를 고장 낸 것처럼 판단하거나, 반대로 나쁜 설비를 좋은 것처럼 착각할 수 있습니다. 이 가이드에서는 메거 시험기의 선택과 측정 절차, 기준값, 낮은 값이 나왔을 때의 원인 추적 순서를 정리합니다.</p>
+
+  <h2>절연저항이란 무엇인가</h2>
+  <p>절연저항은 도체와 대지 사이, 또는 도체와 도체 사이의 절연물이 전류를 얼마나 잘 막는지를 나타내는 저항값입니다. 단위는 메가옴(MΩ)이며, 값이 클수록 절연이 좋다는 뜻입니다. 새 전선의 절연저항은 수백 MΩ 이상이 나오지만, 시간이 지나고 습기와 열, 기계적 손상을 받으면 점점 떨어집니다. 절연저항이 낮아졌다는 것은 절연물 어딘가에 전류가 새는 길이 생겼다는 뜻입니다.</p>
+  <p>절연저항은 메거 시험기(절연저항계)로 측정합니다. 메거는 높은 직류 전압(250V, 500V, 1,000V)을 절연물에 걸고, 그때 흐르는 아주 작은 누설전류를 측정해 저항으로 환산합니다. 일반 멀티미터로는 절연저항을 측정할 수 없습니다. 멀티미터는 낮은 전압으로 측정하기 때문에 절연의 작은 결함을 찾아내지 못합니다. 메거의 높은 전압이 절연의 약한 부분을 드러내는 것입니다.</p>
+  <p>절연저항은 온도와 습도에 크게 영향을 받습니다. 온도가 10°C 오르면 절연저항은 절반 가까이 떨어지고, 습기가 많으면 표면 누설 때문에 값이 크게 낮아집니다. 그래서 측정할 때는 온도와 습도를 함께 기록하고, 같은 조건에서 측정한 이전 값과 비교하는 것이 중요합니다. 비 오는 날 측정한 값과 맑은 날 측정한 값을 직접 비교하면 안 됩니다.</p>
+
+  <h2>메거 전압 선택과 기준값</h2>
+  <p>메거 시험 전압은 측정 대상의 정격전압에 맞게 골라야 합니다. 전압이 너무 낮으면 결함을 찾지 못하고, 너무 높으면 멀쩡한 절연을 손상시킬 수 있습니다.</p>
+  <table>
+    <tr><th>측정 대상</th><th>정격전압</th><th>메거 전압</th><th>기준 절연저항</th></tr>
+    <tr><td>저압 전선·케이블</td><td>600V 이하</td><td>500V</td><td>0.2MΩ 이상</td></tr>
+    <tr><td>저압 기기 (분전반 등)</td><td>600V 이하</td><td>500V</td><td>0.2MΩ 이상</td></tr>
+    <tr><td>전동기 (저압)</td><td>600V 이하</td><td>500V</td><td>1MΩ 이상 권장</td></tr>
+    <tr><td>고압 케이블</td><td>6.6kV급</td><td>1,000V</td><td>10MΩ 이상</td></tr>
+    <tr><td>통신·제어 회로</td><td>60V 이하</td><td>250V</td><td>0.1MΩ 이상</td></tr>
+    <tr><td>변압기 권선 (저압측)</td><td>600V 이하</td><td>500V</td><td>10MΩ 이상 권장</td></tr>
+  </table>
+  <p>KEC에서 정하는 저압 회로의 절연저항 기준은 사용전압에 따라 다릅니다. 400V 이하 회로는 0.2MΩ 이상, 400V 초과 회로는 0.4MΩ 이상이 기준입니다. 다만 이는 최소 기준일 뿐, 새 설비나 양호한 설비에서는 수십 MΩ 이상이 나와야 정상입니다. 측정값이 1MΩ 아래로 떨어졌다면 원인을 찾아야 하고, 0.2MΩ에 가까워졌다면 즉시 사용을 중지하고 수리해야 합니다. 전동기는 권선 온도에 따라 값이 크게 달라지므로, 측정 온도를 함께 기록합니다.</p>
+
+  <h2>단계별 측정 절차</h2>
+  <ol>
+    <li><strong>전원을 차단하고 검전한다.</strong> 측정 회로의 차단기를 내리고 검전기로 무전압을 확인합니다. 메거는 고전압을 발생시키므로 활선 상태에서는 절대 측정하지 않습니다.</li>
+    <li><strong>전자기기를 분리한다.</strong> 회로에 연결된 전자기기, LED 드라이버, 서지 보호기, 전자식 안정기는 메거 전압에 손상될 수 있으므로 분리합니다. 분리하지 않고 측정하면 기기가 고장 나거나 측정값이 왜곡됩니다.</li>
+    <li><strong>측정 대상을 분리한다.</strong> 분전반에서 해당 회로의 차단기를 내리고, 측정할 회로만 남깁니다. 여러 회로를 한꺼번에 측정하면 어느 회로가 나쁜지 알 수 없습니다.</li>
+    <li><strong>메거를 연결한다.</strong> 메거의 한 단자는 측정 도체에, 다른 단자는 접지(대지)에 연결합니다. 도체와 도체 사이의 절연을 측정할 때는 두 도체에 각각 연결합니다.</li>
+    <li><strong>전압을 걸고 1분 뒤 값을 읽는다.</strong> 메거 버튼을 누르고 1분간 유지한 뒤 값을 읽습니다. 처음에는 흡수 전류 때문에 값이 낮게 나오다가 서서히 안정되므로, 1분 값을 기준으로 삼습니다.</li>
+    <li><strong>측정 후 방전한다.</strong> 측정이 끝나면 메거를 분리하기 전에 측정 대상을 접지시켜 충전된 전하를 방전합니다. 긴 케이블이나 전동기 권선은 정전 용량이 커서 방전하지 않으면 감전될 수 있습니다.</li>
+    <li><strong>값을 기록한다.</strong> 측정값과 함께 측정 날짜, 온도, 습도, 사용한 메거 전압을 기록합니다. 다음 측정 때 비교 자료가 됩니다.</li>
+  </ol>
+
+  <h2>낮은 값이 나왔을 때의 원인 추적</h2>
+  <ul>
+    <li><strong>습기 침입:</strong> 가장 흔한 원인입니다. 비가 새는 곳, 결로가 생기는 곳, 지하실의 전선은 절연저항이 낮게 나옵니다. 건조시킨 뒤 다시 측정하고, 방수 조치를 합니다.</li>
+    <li><strong>피복 손상:</strong> 전선을 당기거나 꺾을 때, 쥐가 갉아먹었을 때 피복이 손상됩니다. 손상 부위를 찾아 절연 테이프나 열수축 튜브로 보수하거나, 구간을 교체합니다.</li>
+    <li><strong>먼지와 오염:</strong> 분전반이나 단자함에 쌓인 먼지와 기름이 표면 누설을 만듭니다. 청소한 뒤 다시 측정하면 값이 회복되는 경우가 많습니다.</li>
+    <li><strong>절연 열화:</strong> 오래된 전선이나 고온에 노출된 전선은 절연물이 굳고 갈라집니다. 절연저항이 해마다 조금씩 떨어진다면 열화를 의심하고 교체를 검토합니다.</li>
+    <li><strong>기기 내부 결함:</strong> 전동기 권선이나 변압기 권선 내부의 절연이 나빠진 경우입니다. 권선을 건조시키거나, 심하면 재권선·교체가 필요합니다.</li>
+  </ul>
+
+  <h2>측정값 해석과 편극 지수</h2>
+  <p>절연 상태를 더 정확히 판단할 때는 1분 값과 10분 값의 비율인 편극 지수(PI)를 씁니다. 편극 지수는 10분 측정값을 1분 측정값으로 나눈 값으로, 양호한 절연은 시간이 지날수록 흡수 전류가 줄어들어 저항이 올라가므로 편극 지수가 2 이상이 나옵니다. 편극 지수가 1에 가까우면 절연이 열화되었거나 오염되었다는 뜻입니다. 편극 지수는 주로 전동기나 변압기처럼 큰 기기의 절연 진단에 씁니다.</p>
+  <p>측정값을 해석할 때는 절대값보다 변화 추이가 더 중요합니다. 새 설비에서 500MΩ이 나오던 회로가 1년 뒤 50MΩ, 2년 뒤 5MΩ으로 떨어지고 있다면, 아직 기준 이상이라 해도 절연이 빠르게 나빠지고 있다는 신호입니다. 정기적으로 측정해 추이를 기록하면, 고장이 나기 전에 미리 수리할 수 있습니다. 정기 검사 기록은 전기안전공사 검사 때도 중요한 자료가 됩니다.</p>
+
+  <h2>전동기 권선 절연 진단</h2>
+  <p>전동기 권선의 절연은 전동기 수명을 결정하는 가장 중요한 요소입니다. 권선 절연은 열, 습기, 진동, 전압 스트레스에 조금씩 약해지며, 절연이 나빠지면 층간 단락이나 대지 단락이 생겨 전동기가 타 버립니다. 권선 절연 진단은 절연저항 측정과 편극 지수, 그리고 절연저항의 온도 보정을 함께 봅니다. 절연저항은 온도가 높을수록 낮게 나오므로, 측정 온도를 기록하고 기준 온도(40°C)로 환산해 비교해야 합니다. 온도가 10°C 오를 때마다 절연저항이 절반으로 떨어진다고 보면 됩니다.</p>
+  <p>권선 절연을 측정할 때는 권선과 대지 사이의 절연저항을 재고, 3상 권선에서는 상과 상 사이의 절연도 확인합니다. 측정 전에는 전동기 단자함의 먼지를 제거하고, 권선이 젖어 있다면 먼저 건조시킵니다. 건조 방법으로는 전류를 흘려 권선 자체의 열로 말리는 전류 건조법과, 오븐이나 열풍기로 말리는 방법이 있습니다. 전류 건조법은 저전압으로 권선에 전류를 흘려 서서히 온도를 올리는 방식으로, 급격한 온도 상승을 피해야 합니다. 건조 후에는 절연저항을 다시 측정해 기준 이상으로 회복됐는지 확인합니다.</p>
+  <p>절연저항이 건조 후에도 기준에 미치지 못하면 권선 내부의 절연이 열화된 것입니다. 편극 지수가 1에 가깝거나, 절연저항이 해마다 빠르게 떨어지고 있다면 재권선을 검토해야 합니다. 재권선 여부를 판단할 때는 전동기의 잔존 가치와 재권선 비용을 비교합니다. 소형 전동기는 교체가 유리하고, 대형 전동기는 재권선이 경제적인 경우가 많습니다. 권선 절연 진단 기록은 전동기별로 정리해 두면, 교체 시기를 미리 잡을 수 있습니다.</p>
+
+  <h2>절연저항 측정 기록 관리</h2>
+  <p>절연저항 측정값은 한 번만 보고 버리면 의미가 없습니다. 같은 회로를 정기적으로 측정해 값을 기록하면, 절연이 얼마나 빨리 나빠지고 있는지 추이를 볼 수 있습니다. 새 설비에서 500MΩ이 나오던 회로가 1년 뒤 100MΩ, 2년 뒤 20MΩ으로 떨어지고 있다면, 아직 기준 이상이라 해도 절연이 빠르게 열화되고 있다는 신호입니다. 이런 회로는 교체 일정을 미리 잡아야 합니다. 반대로 10년 동안 200MΩ을 유지하는 회로는 절연이 안정적이라고 판단할 수 있습니다.</p>
+  <p>기록은 회로별로 표를 만들어 관리합니다. 측정 날짜, 측정값, 측정 온도, 습도, 사용한 메거 전압, 측정자를 한 행에 적습니다. 온도가 다르면 값을 직접 비교할 수 없으므로, 측정 온도를 함께 적는 것이 중요합니다. 온도가 10°C 다르면 절연저항이 절반 가까이 달라지기 때문입니다. 기록을 그래프로 그리면 변화가 한눈에 들어오고, 전기안전공사 정기 검사 때도 유용한 자료가 됩니다.</p>
+  <p>측정 기록은 분전반 문 안쪽에 최근 결과를 붙여 두면 다음 점검자가 바로 확인할 수 있습니다. 디지털로 관리하면 스프레드시트에 입력해 추이 그래프를 자동으로 그릴 수 있습니다. 절연저항이 기준값에 가까워지면 알림을 받도록 설정해 두면, 기준 미달이 되기 전에 조치할 수 있습니다. 기록 관리는 비용이 들지 않으면서 설비 수명을 늘리는 가장 확실한 방법입니다.</p>
+
+  <h2>절연저항 측정 시 흔한 실수</h2>
+  <p>절연저항 측정에서 가장 흔한 실수는 전자기기를 분리하지 않고 측정하는 것입니다. LED 드라이버나 전자식 안정기, 서지 보호기가 연결된 채로 측정하면 기기가 손상되거나 측정값이 왜곡됩니다. 측정 전에는 회로에 연결된 모든 전자기기를 분리하고, 서지 보호기는 단자를 떼어 내야 합니다. 분리한 기기는 측정 후에 다시 연결하고, 연결 상태를 확인합니다.</p>
+  <p>또 다른 실수는 측정 후 방전을 빼먹는 것입니다. 긴 케이블이나 전동기 권선은 정전 용량이 커서 측정 전압으로 충전된 전하가 남습니다. 방전하지 않고 단자를 만지면 감전될 수 있습니다. 측정 후에는 접지선을 이용해 충분히 방전한 뒤 단자를 분리합니다. 측정값을 읽을 때도 1분 값을 기준으로 해야 하며, 버튼을 누르자마자 읽은 값은 흡수 전류 때문에 낮게 나옵니다.</p>
+
+  <h2>자주 묻는 질문</h2>
+  <h3>절연저항은 얼마나 자주 측정해야 하나요?</h3>
+  <p>법정 정기 검사(연 1회 이상) 때 측정하는 것이 기본입니다. 다만 습기가 많은 장소나 노후 설비는 반기별로 측정하는 것이 좋습니다. 새 설비를 준공할 때, 회로를 수리하거나 증설한 뒤, 누전차단기가 반복해서 동작할 때도 측정해야 합니다.</p>
+  <h3>메거로 측정하면 설비가 손상되지 않나요?</h3>
+  <p>정격에 맞는 전압을 쓰면 손상되지 않습니다. 다만 전자기기나 반도체가 들어간 기기는 메거 전압에 약하므로 측정 전에 반드시 분리해야 합니다. LED 조명, 전자식 안정기, 인버터, 통신기기를 연결한 채로 측정하면 기기가 고장 날 수 있습니다.</p>
+  <h3>절연저항이 0에 가깝게 나오면 어떻게 하나요?</h3>
+  <p>전선을 분리해 구간별로 다시 측정합니다. 분전반에서 회로를 분리하고 전선만 측정해, 전선 문제인지 기기 문제인지 구분합니다. 전선만으로도 0에 가깝다면 피복 손상이나 습기 침입이므로 손상 부위를 찾아 교체합니다. 통전은 절대 하지 말고, 원인을 해결한 뒤 다시 측정해 기준 이상이 나와야 사용합니다.</p>
+
+  <div class="safety"><strong>안전 수칙:</strong> 메거 측정은 반드시 무전압 상태에서 실시하세요. 측정 중에는 측정 대상에 손을 대지 마세요. 측정 후에는 반드시 방전하고 나서 단자를 분리하세요. 긴 케이블과 전동기 권선은 충전 전하가 남아 감전될 수 있습니다. 메거 전압에 약한 전자기기는 측정 전에 반드시 분리하세요.</div>
+
+  <div class="related">
+    <h3>관련 계산기</h3>
+    <ul>
+      <li><a href="../index.html#calc-breaker">차단기 용량 선정 계산기</a> — 누전차단기 정격 선정</li>
+      <li><a href="../index.html#calc-vdrop">전압강하 계산기</a> — 긴 배선 구간의 전압강하 확인</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>전기설비 허브</h4>
+        <p>전기공사 현장과 설계를 위한 무료 계산기. KS C IEC 60364 기준 · 380V 3상 / 220V 단상 · 60Hz.</p>
+        <p style="margin-top:8px">electricalcalc.github.io/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="../index.html#calc-wire">전선 굵기·허용전류</a></li>
+          <li><a href="../index.html#calc-breaker">차단기 용량 선정</a></li>
+          <li><a href="../index.html#calc-vdrop">전압강하</a></li>
+          <li><a href="../index.html#calc-3phase">3상 전류·전력</a></li>
+          <li><a href="../index.html#calc-demand">부하용량·수요율</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가이드</h4>
+        <ul>
+          <li><a href="distribution-board-wiring.html">분전반 결선 실무</a></li>
+          <li><a href="grounding-work.html">접지공사와 접지저항</a></li>
+          <li><a href="elcb-selection.html">누전차단기 선정과 오동작 대책</a></li>
+          <li><a href="cable-laying-conduit.html">케이블 포설과 전선관 공사</a></li>
+          <li><a href="insulation-resistance-test.html">절연저항 측정 실무</a></li>
+          <li><a href="electrical-inspection-safety.html">전기설비 점검과 안전관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 전기설비 허브 · 모든 계산은 브라우저 안에서 처리됩니다 · 결과는 추정치입니다 — 제조사 자료와 전기설비기술기준(KEC)으로 확인하세요.</div>
+  </div>
+</footer>
+
+</body>
+</html>

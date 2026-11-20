@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>접지공사와 접지저항 — 전기설비 허브</title>
+<meta name="description" content="접지공사의 실무 해설: 제1종·제2종·제3종 접지의 구분과 접지저항 기준값, 접지봉 매설 방법, 접지저항 측정법과 기준 미달 시 대책을 정리했습니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+.article{padding:26px 0 12px}
+.back{margin-bottom:10px}
+.back a{font-weight:700;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.crumb{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.article h1{font-size:clamp(26px,4.5vw,34px);line-height:1.25;margin-bottom:10px}
+.lede{font-size:17px;color:#334155;margin-bottom:22px}
+.article h2{font-size:21px;margin:28px 0 8px;padding-top:6px;border-top:2px solid var(--amber);display:inline-block}
+.article h3{font-size:17px;margin:18px 0 6px}
+.article p{font-size:15.5px;color:#1e293b;margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px;font-size:15.5px;color:#1e293b}
+.article li{margin-bottom:6px}
+.article table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.article th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px}
+.article td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.article tr:nth-child(even) td{background:#f8fafc}
+.formula{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:8px;padding:10px 12px;margin:12px 0}
+.formula code{color:var(--navy);font-weight:600}
+.safety{background:var(--red-bg);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;margin:22px 0;font-size:14.5px;color:#7f1d1d}
+.related{background:var(--amber-bg);border:1px solid #fde68a;border-radius:12px;padding:16px 18px;margin:22px 0}
+.related h3{font-size:15px;margin:0 0 8px}
+.related ul{margin:0 0 0 20px}
+.related li{margin-bottom:4px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="../index.html"><span class="mark">전</span><span><b>전기설비 <span>허브</span></b><small>electricalcalc.github.io/</small></span></a>
+    <nav class="main-nav">
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#reference">기준표</a>
+      <a href="../index.html#guides">실무 가이드</a>
+      <a href="../index.html#faq">자주 묻는 질문</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap article">
+  <p class="back"><a href="../index.html">&larr; 전기설비 허브로 돌아가기</a></p>
+  <p class="crumb">가이드 / 접지</p>
+  <h1>접지공사와 접지저항</h1>
+  <p class="lede">접지는 감전과 화재를 막는 마지막 보루입니다. 기기 외함에 누전이 생겼을 때 전류가 땅으로 빠져나갈 길을 만들어 주지 않으면, 외함을 만진 사람이 전류의 통로가 됩니다. 접지공사는 땅속에 묻혀 눈에 보이지 않기 때문에 소홀해지기 쉽지만, 전기설비에서 가장 중요한 안전장치 중 하나입니다. 이 가이드에서는 접지의 종류와 기준값, 접지봉 매설 방법, 접지저항 측정법과 기준 미달 시의 대책을 정리합니다.</p>
+
+  <h2>접지란 무엇인가</h2>
+  <p>접지란 전기기기의 외함이나 전로의 한 점을 의도적으로 대지와 연결하는 것을 말합니다. 정상 상태에서는 접지선에 전류가 흐르지 않지만, 절연이 파괴되어 외함에 전압이 걸리면 접지선을 통해 고장전류가 대지로 흐르고, 차단기나 누전차단기가 동작해 전원을 끊습니다. 접지가 없으면 외함에 걸린 전압이 그대로 남아 있어 사람이 외함을 만지는 순간 감전됩니다. 접지저항이 낮을수록 고장전류가 잘 흐르고, 차단기가 빨리 동작합니다.</p>
+  <p>접지는 목적에 따라 계통 접지와 설비 접지로 나뉩니다. 계통 접지는 변압기 중성점처럼 전로의 한 점을 대지에 연결해 전압을 안정시키는 것이고, 설비 접지는 기기 외함을 대지에 연결해 감전을 방지하는 것입니다. 현장에서 흔히 말하는 접지공사는 대부분 설비 접지를 뜻합니다. 접지선은 녹색과 황색이 섞인 줄무늬 전선을 쓰며, 접지선으로 다른 용도의 전선을 쓰는 것은 금지됩니다.</p>
+  <p>접지저항은 접지 전극과 대지 사이의 저항을 말하며, 단위는 옴(Ω)입니다. 토양의 종류, 수분 함량, 접지봉의 길이와 개수, 매설 깊이에 따라 달라집니다. 건조한 모래땅은 저항이 높고, 점토질 땅은 저항이 낮습니다. 접지저항이 기준을 초과하면 고장전류가 충분히 흐르지 않아 차단기가 늦게 동작하거나 동작하지 않을 수 있습니다.</p>
+
+  <h2>접지의 종류와 접지저항 기준</h2>
+  <p>전기설비기술기준(KEC)에서는 접지공사를 제1종부터 특별 제3종까지 구분합니다. 각 종류마다 적용 대상과 접지저항 기준값이 다릅니다.</p>
+  <table>
+    <tr><th>접지 종류</th><th>적용 대상</th><th>접지저항 기준</th><th>접지선 굵기</th></tr>
+    <tr><td>제1종 접지공사</td><td>특고압 기기 외함, 피뢰기 등</td><td>10Ω 이하</td><td>6mm² 이상</td></tr>
+    <tr><td>제2종 접지공사</td><td>변압기 중성점(계통 접지)</td><td>100Ω 이하 (특고압은 10Ω 이하)</td><td>저압 6mm², 고압 16mm² 이상</td></tr>
+    <tr><td>제3종 접지공사</td><td>저압 기기 외함, 금속 전선관 등</td><td>100Ω 이하</td><td>2.5mm² 이상</td></tr>
+    <tr><td>특별 제3종 접지공사</td><td>400V 초과 저압 기기 외함</td><td>10Ω 이하</td><td>2.5mm² 이상</td></tr>
+  </table>
+  <p>현장에서 가장 많이 접하는 것은 제3종과 특별 제3종 접지입니다. 220V 기기의 외함은 제3종(100Ω 이하), 380V 전동기나 분전반 함체처럼 400V에 가까운 전압을 쓰는 기기는 특별 제3종(10Ω 이하)이 적용됩니다. 접지저항 기준을 착각하면 검사를 통과하지 못하므로, 설계 단계에서 어떤 접지가 적용되는지 반드시 확인해야 합니다. 접지선 굵기도 기준 이상을 써야 하며, 접지선은 기계적 강도가 약한 가는 전선을 쓰면 시공 중 끊어지기 쉽습니다.</p>
+
+  <h2>접지봉 매설 방법</h2>
+  <p>접지봉은 보통 동봉이나 동피복 강봉을 씁니다. 표준 접지봉은 길이 2.4m, 지름 14~16mm 정도이며, 땅속에 수직으로 박습니다. 접지봉이 깊이 박힐수록 접촉 면적이 넓어져 접지저항이 낮아집니다. 한 개의 접지봉으로 기준을 맞추기 어려우면 여러 개를 병렬로 연결합니다. 접지봉 간격은 봉 길이의 2배 이상 떨어뜨려야 효과가 겹치지 않습니다. 너무 가까이 박으면 각 봉의 접지 영역이 겹쳐 저항이 충분히 낮아지지 않습니다.</p>
+  <p>매설 위치는 습기가 있고 토양이 좋은 곳을 고릅니다. 건물 주변의 화단이나 배수구 근처가 유리합니다. 반대로 자갈이나 모래가 많은 곳, 아스팔트 아래는 피해야 합니다. 접지봉을 박을 때는 해머로 직접 두드리지 말고 전용 타격 캡을 써서 봉 머리가 뭉개지지 않게 합니다. 접지봉과 접지선은 전용 클램프로 확실히 체결하고, 접속부는 부식을 막기 위해 방수 테이프나 그리스로 감싸는 것이 좋습니다.</p>
+  <p>대규모 설비에서는 접지봉 대신 접지동판이나 접지망을 쓰기도 합니다. 접지망은 동선을 격자 모양으로 땅속에 묻는 방식으로, 변전소나 공장처럼 넓은 면적의 접지가 필요할 때 사용합니다. 접지망은 접지저항이 낮고 안정적이지만 시공 비용이 많이 듭니다. 주택이나 소규모 상가에서는 접지봉 2~3개로 충분한 경우가 많습니다.</p>
+
+  <h2>단계별 접지공사 절차</h2>
+  <ol>
+    <li><strong>접지 종류와 기준을 확인한다.</strong> 설비의 전압과 용도에 따라 제1종, 제3종, 특별 제3종 중 어떤 접지가 적용되는지 확인하고, 목표 접지저항을 정합니다.</li>
+    <li><strong>매설 위치를 정한다.</strong> 토양이 습하고 좋은 곳, 다른 배관이나 케이블과 간섭이 없는 곳을 고릅니다. 매설 전에 지하 매설물 도면을 확인합니다.</li>
+    <li><strong>접지봉을 매설한다.</strong> 전용 타격 캡을 이용해 접지봉을 수직으로 박습니다. 봉 상단은 지표면보다 30cm 이상 깊이 묻히게 하고, 여러 개를 쓸 때는 간격을 봉 길이의 2배 이상 둡니다.</li>
+    <li><strong>접지선을 연결한다.</strong> 접지봉과 접지선을 전용 클램프로 체결하고, 접지선을 분전반의 접지 버스바까지 끌어옵니다. 접속부는 부식 방지를 위해 방수 처리를 합니다.</li>
+    <li><strong>접지저항을 측정한다.</strong> 접지저항 측정기로 저항값을 측정합니다. 기준을 초과하면 접지봉을 추가하거나 깊이를 늘립니다.</li>
+    <li><strong>접지 단자함을 설치한다.</strong> 접지선 접속부는 점검할 수 있도록 단자함을 설치하고, 접지선에 표시를 붙입니다. 단자함은 접지저항 정기 측정을 위해 반드시 필요합니다.</li>
+    <li><strong>기록을 남긴다.</strong> 접지봉 위치, 개수, 측정값, 측정 날짜를 기록해 보관합니다. 다음 정기 검사 때 같은 위치에서 측정해 변화를 비교할 수 있습니다.</li>
+  </ol>
+
+  <h2>접지저항이 기준을 초과할 때의 대책</h2>
+  <ul>
+    <li><strong>접지봉 추가:</strong> 가장 확실한 방법입니다. 기존 봉에서 충분히 떨어진 위치에 봉을 추가하고 병렬로 연결합니다. 봉을 2개 쓰면 저항이 절반 가까이 떨어지지만, 간격이 좁으면 효과가 줄어듭니다.</li>
+    <li><strong>접지봉 길이 연장:</strong> 더 긴 접지봉을 쓰거나, 봉을 이어서 깊이 박습니다. 지하수에 닿을 만큼 깊게 박으면 저항이 크게 낮아집니다.</li>
+    <li><strong>토양 개량:</strong> 접지봉 주변에 벤토나이트나 접지저감제를 채웁니다. 수분을 머금어 토양 저항을 낮추는 효과가 있습니다. 다만 시간이 지나면 효과가 떨어지므로 주기적으로 보충해야 합니다.</li>
+    <li><strong>접지망으로 변경:</strong> 여러 개의 봉을 동선으로 연결해 그물 모양으로 만들면 접촉 면적이 넓어져 저항이 안정적으로 낮아집니다.</li>
+    <li><strong>건조한 계절 재측정:</strong> 접지저항은 토양 수분에 따라 계절별로 달라집니다. 장마철에 측정한 값과 겨울철 값이 크게 다를 수 있으니, 가장 불리한 조건(건조한 시기) 기준으로 판단합니다.</li>
+  </ul>
+
+  <h2>접지저항 측정 방법</h2>
+  <p>접지저항은 접지저항 측정기(어스 테스터)로 측정합니다. 측정기는 전류 전극과 전위 전극이라는 두 개의 보조 전극을 땅에 꽂고, 접지 전극과의 전위차를 이용해 저항을 계산합니다. 보조 전극은 접지 전극에서 10m 이상 떨어진 직선 위에 배치하고, 전위 전극은 두 전극 사이의 약 62% 지점에 꽂는 것이 표준입니다. 측정값이 전위 전극 위치에 따라 크게 변하면 전극 간격이 부족한 것이므로 더 멀리 옮겨 다시 측정합니다.</p>
+  <p>측정 전에는 접지선을 분리해야 합니다. 접지선이 분전반에 연결된 채로 측정하면 다른 회로의 접지가 병렬로 잡혀 실제보다 낮게 나올 수 있습니다. 측정이 끝나면 접지선을 반드시 다시 연결하고, 연결 상태를 확인합니다. 정기 검사에서는 같은 위치와 같은 방법으로 측정해 작년 값과 비교하는 것이 중요합니다. 접지저항이 해마다 조금씩 오르고 있다면 접지봉 부식이나 토양 건조를 의심해야 합니다.</p>
+
+  <h2>계절별 접지저항 변화와 관리</h2>
+  <p>접지저항은 일년 내내 같은 값이 아닙니다. 토양의 수분에 따라 크게 달라지기 때문입니다. 장마철에는 토양이 물을 머금어 접지저항이 낮아지고, 겨울철 건조한 시기에는 저항이 올라갑니다. 땅이 얼면 접지저항이 급격히 올라가 기준을 초과하는 경우도 있습니다. 그래서 접지저항 측정값은 측정 시기를 함께 봐야 합니다. 장마철에 측정한 값이 기준 이내라고 해서 겨울에도 기준 이내라는 보장은 없습니다.</p>
+  <p>정확한 판단을 위해서는 가장 불리한 조건, 즉 토양이 건조한 시기에 측정하는 것이 좋습니다. 연 2회 측정한다면 한 번은 장마가 끝난 뒤, 한 번은 겨울철 건조기에 측정해 두 값을 비교합니다. 두 값의 차이가 크다면 접지봉을 추가하거나 토양 개량을 검토해야 합니다. 측정할 때는 항상 같은 위치에서 같은 방법으로 측정해야 값을 비교할 수 있습니다. 전극을 꽂는 위치가 달라지면 측정값이 달라지므로, 전극 위치를 표시해 두는 것이 좋습니다.</p>
+  <p>접지설비는 매설 후에도 관리가 필요합니다. 접지봉은 땅속에서 서서히 부식되고, 접지선 접속부는 습기에 노출되어 녹이 슬 수 있습니다. 정기 점검 때 접지 단자함을 열어 접속 상태를 확인하고, 녹이 슨 부분은 청소하고 다시 조입니다. 토양 개량제를 쓴 곳은 개량제가 마르지 않았는지 확인하고, 필요하면 보충합니다. 접지저항이 해마다 조금씩 오르고 있다면 접지봉 부식을 의심하고, 심하면 접지봉을 교체하거나 추가합니다. 접지저항 측정 기록은 매년 같은 표에 정리해 추이를 한눈에 볼 수 있게 합니다.</p>
+
+  <h2>접지선 굵기와 접속 방법</h2>
+  <p>접지선 굵기는 보호 대상 회로의 전선 굵기에 따라 정합니다. 회로 전선이 2.5mm² 이하이면 접지선은 2.5mm² 이상, 전선이 16mm² 이하이면 전선과 같은 굵기, 16mm²를 초과하면 전선 굵기의 절반 이상을 씁니다. 접지선을 너무 가늘게 쓰면 고장전류가 흐를 때 접지선이 타 버려 보호 기능이 사라집니다. 접지선은 녹색과 황색 줄무늬 전선을 쓰며, 다른 용도로 쓰지 않습니다.</p>
+  <p>접지선 접속은 압착 단자나 전용 클램프로 확실히 체결합니다. 접지선과 접지봉의 접속부는 부식을 막기 위해 방수 테이프로 감싸거나 그리스를 바릅니다. 접속이 느슨하면 접지저항이 올라가 고장 시 차단기가 늦게 동작합니다. 분전반에서는 모든 회로의 접지선을 접지 버스바에 모으고, 접지 버스바와 함체를 본딩합니다. 접지선은 가능한 한 짧고 곧게 배선해 고장전류가 잘 흐르게 합니다.</p>
+
+  <h2>자주 묻는 질문</h2>
+  <h3>접지저항은 왜 낮을수록 좋은가요?</h3>
+  <p>접지저항이 낮으면 고장전류가 접지선으로 잘 흘러 차단기가 빨리 동작합니다. 접지저항이 높으면 고장전류가 작아 차단기가 늦게 동작하고, 그 사이 기기 외함에 위험한 전압이 걸린 상태가 유지됩니다. 접촉전압은 고장전류와 접지저항의 곱이므로, 저항이 낮을수록 사람이 만졌을 때 위험도 낮아집니다.</p>
+  <h3>접지봉을 여러 개 박으면 저항이 얼마나 낮아지나요?</h3>
+  <p>이론적으로는 봉을 2개 쓰면 저항이 절반이 되지만, 실제로는 봉 사이의 간섭 때문에 절반까지 떨어지지 않습니다. 간격을 봉 길이의 2배 이상 두면 50~60% 정도 낮아지는 것이 일반적입니다. 봉을 3~4개까지 늘리면 효과가 점점 줄어드므로, 그 이상은 접지망을 검토하는 것이 낫습니다.</p>
+  <h3>접지선을 물관이나 가스관에 연결해도 되나요?</h3>
+  <p>안 됩니다. 수도관이나 가스관을 접지 전극으로 쓰는 것은 금지되어 있습니다. 배관이 교체되거나 절연 접속부가 생기면 접지가 끊어지고, 고장전류가 배관을 타고 다른 곳으로 흘러 위험합니다. 접지는 반드시 전용 접지봉이나 접지망으로 시공해야 합니다.</p>
+
+  <div class="safety"><strong>안전 수칙:</strong> 접지선은 절대로 임의로 분리하거나 제거하지 마세요. 접지저항 측정 후에는 접지선을 반드시 복원하고 체결 상태를 확인하세요. 접지봉 매설 전에는 지하 매설물(가스관, 상수관, 통신 케이블) 위치를 확인해 손상을 방지하세요. 뇌우 중에는 접지공사를 하지 마세요.</div>
+
+  <div class="related">
+    <h3>관련 계산기</h3>
+    <ul>
+      <li><a href="../index.html#calc-breaker">차단기 용량 선정 계산기</a> — 누전차단기 정격과 감도전류 선정</li>
+      <li><a href="../index.html#calc-wire">전선 굵기·허용전류 계산기</a> — 접지선 굵기 확인</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>전기설비 허브</h4>
+        <p>전기공사 현장과 설계를 위한 무료 계산기. KS C IEC 60364 기준 · 380V 3상 / 220V 단상 · 60Hz.</p>
+        <p style="margin-top:8px">electricalcalc.github.io/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="../index.html#calc-wire">전선 굵기·허용전류</a></li>
+          <li><a href="../index.html#calc-breaker">차단기 용량 선정</a></li>
+          <li><a href="../index.html#calc-vdrop">전압강하</a></li>
+          <li><a href="../index.html#calc-3phase">3상 전류·전력</a></li>
+          <li><a href="../index.html#calc-demand">부하용량·수요율</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가이드</h4>
+        <ul>
+          <li><a href="distribution-board-wiring.html">분전반 결선 실무</a></li>
+          <li><a href="grounding-work.html">접지공사와 접지저항</a></li>
+          <li><a href="elcb-selection.html">누전차단기 선정과 오동작 대책</a></li>
+          <li><a href="cable-laying-conduit.html">케이블 포설과 전선관 공사</a></li>
+          <li><a href="insulation-resistance-test.html">절연저항 측정 실무</a></li>
+          <li><a href="electrical-inspection-safety.html">전기설비 점검과 안전관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 전기설비 허브 · 모든 계산은 브라우저 안에서 처리됩니다 · 결과는 추정치입니다 — 제조사 자료와 전기설비기술기준(KEC)으로 확인하세요.</div>
+  </div>
+</footer>
+
+</body>
+</html>
